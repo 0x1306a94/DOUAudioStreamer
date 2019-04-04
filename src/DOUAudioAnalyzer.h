@@ -16,7 +16,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define kDOUAudioAnalyzerLevelCount 20
+#define kDOUAudioAnalyzerLevelCount 80
 
 @interface DOUAudioAnalyzer : NSObject
 
@@ -26,7 +26,7 @@
 - (void)flush;
 
 - (void)copyLevels:(float *)levels;
-
+- (void)copyLeftLevels:(float *)leftlevels rightLevels:(float *)rightLevels;
 @property (nonatomic, assign) NSTimeInterval interval;
 @property (nonatomic, assign, getter=isEnabled) BOOL enabled;
 

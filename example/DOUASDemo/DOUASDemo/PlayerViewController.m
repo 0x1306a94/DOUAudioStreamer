@@ -18,6 +18,7 @@
 #import "Track.h"
 #import "DOUAudioStreamer.h"
 #import "DOUAudioVisualizer.h"
+#import "SpectrumView.h"
 
 static void *kStatusKVOKey = &kStatusKVOKey;
 static void *kDurationKVOKey = &kDurationKVOKey;
@@ -43,6 +44,8 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 
   DOUAudioStreamer *_streamer;
   DOUAudioVisualizer *_audioVisualizer;
+
+    SpectrumView *_spectrumView;
 }
 @end
 
@@ -53,7 +56,7 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
   UIView *view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   [view setBackgroundColor:[UIColor whiteColor]];
 
-  _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 64.0, CGRectGetWidth([view bounds]), 30.0)];
+  _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 100, CGRectGetWidth([view bounds]), 30.0)];
   [_titleLabel setFont:[UIFont systemFontOfSize:20.0]];
   [_titleLabel setTextColor:[UIColor blackColor]];
   [_titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -104,10 +107,16 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
   [_volumeSlider addTarget:self action:@selector(_actionSliderVolume:) forControlEvents:UIControlEventValueChanged];
   [view addSubview:_volumeSlider];
 
-  _audioVisualizer = [[DOUAudioVisualizer alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY([_volumeSlider frame]), CGRectGetWidth([view bounds]), CGRectGetHeight([view bounds]) - CGRectGetMaxY([_volumeSlider frame]))];
-  [_audioVisualizer setBackgroundColor:[UIColor colorWithRed:239.0 / 255.0 green:244.0 / 255.0 blue:240.0 / 255.0 alpha:1.0]];
-  [view addSubview:_audioVisualizer];
+//  _audioVisualizer = [[DOUAudioVisualizer alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY([_volumeSlider frame]), CGRectGetWidth([view bounds]), CGRectGetHeight([view bounds]) - CGRectGetMaxY([_volumeSlider frame]))];
+//  [_audioVisualizer setBackgroundColor:[UIColor colorWithRed:239.0 / 255.0 green:244.0 / 255.0 blue:240.0 / 255.0 alpha:1.0]];
+//  [view addSubview:_audioVisualizer];
 
+    _spectrumView = [[SpectrumView alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY([_volumeSlider frame]), CGRectGetWidth([view bounds]), 100)];
+    _spectrumView.backgroundColor = UIColor.blackColor;
+    CGFloat barSpace = CGRectGetWidth(view.frame) / (CGFloat)(80 * 3 - 1);
+    _spectrumView.barWidth = barSpace * 2;
+    _spectrumView.space = barSpace;
+    [view addSubview:_spectrumView];
   [self setView:view];
 }
 

@@ -16,7 +16,7 @@
 
 #import "DOUAudioAnalyzer.h"
 
-#define kDOUAudioAnalyzerSampleCount 1024
+#define kDOUAudioAnalyzerSampleCount 2048
 #define kDOUAudioAnalyzerCount (kDOUAudioAnalyzerSampleCount / 2)
 
 @interface DOUAudioAnalyzer ()

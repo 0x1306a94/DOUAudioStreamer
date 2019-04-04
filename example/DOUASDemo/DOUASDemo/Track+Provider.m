@@ -64,25 +64,43 @@
 
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    NSMutableArray *allTracks = [NSMutableArray array];
-    for (MPMediaItem *item in [[MPMediaQuery songsQuery] items]) {
-      if ([[item valueForProperty:MPMediaItemPropertyIsCloudItem] boolValue]) {
-        continue;
+      NSArray<NSString *> *paths = [[[NSBundle mainBundle] pathsForResourcesOfType:@"mp3" inDirectory:nil] sortedArrayUsingSelector:@selector(compare:)];
+
+
+      NSMutableArray *allTracks = [NSMutableArray array];
+
+      for (NSString *path in paths) {
+          Track *track = [[Track alloc] init];
+          track.artist = @"未知";
+          track.title = [path componentsSeparatedByString:@"/"].lastObject;
+          track.audioFileURL = [NSURL fileURLWithPath:path];
+          [allTracks addObject:track];
       }
-
       Track *track = [[Track alloc] init];
-      [track setArtist:[item valueForProperty:MPMediaItemPropertyArtist]];
-      [track setTitle:[item valueForProperty:MPMediaItemPropertyTitle]];
-      [track setAudioFileURL:[item valueForProperty:MPMediaItemPropertyAssetURL]];
+      track.artist = @"未知";
+      track.title = @"未知";
+      track.audioFileURL = [NSURL URLWithString:@"http://audio01.dmhmusic.com/179_139_T10038844445_320_2_1_0_sdk-ts/0210/M00/10/A2/ChR461nwzd6AdTFoAJx9OFJjeb4031.mp3?xcode=78f7ee1ac0b52c2f43e02034242bd8658297000"];
       [allTracks addObject:track];
-    }
+      tracks = [allTracks copy];
 
-    for (NSUInteger i = 0; i < [allTracks count]; ++i) {
-      NSUInteger j = arc4random_uniform((u_int32_t)[allTracks count]);
-      [allTracks exchangeObjectAtIndex:i withObjectAtIndex:j];
-    }
-
-    tracks = [allTracks copy];
+//    for (MPMediaItem *item in [[MPMediaQuery songsQuery] items]) {
+//      if ([[item valueForProperty:MPMediaItemPropertyIsCloudItem] boolValue]) {
+//        continue;
+//      }
+//
+//      Track *track = [[Track alloc] init];
+//      [track setArtist:[item valueForProperty:MPMediaItemPropertyArtist]];
+//      [track setTitle:[item valueForProperty:MPMediaItemPropertyTitle]];
+//      [track setAudioFileURL:[item valueForProperty:MPMediaItemPropertyAssetURL]];
+//      [allTracks addObject:track];
+//    }
+//
+//    for (NSUInteger i = 0; i < [allTracks count]; ++i) {
+//      NSUInteger j = arc4random_uniform((u_int32_t)[allTracks count]);
+//      [allTracks exchangeObjectAtIndex:i withObjectAtIndex:j];
+//    }
+//
+//    tracks = [allTracks copy];
   });
 
   return tracks;

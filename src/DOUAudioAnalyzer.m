@@ -16,30 +16,39 @@
 
 #import "DOUAudioAnalyzer.h"
 #import "DOUAudioAnalyzer_Private.h"
+#import "RealtimeAnalyzer.h"
+
 #include <Accelerate/Accelerate.h>
 #include <pthread.h>
 #include <mach/mach_time.h>
 
 @interface DOUAudioAnalyzer () {
 @private
-  int16_t _sampleBuffer[kDOUAudioAnalyzerSampleCount];
-  struct {
-    float sample[kDOUAudioAnalyzerSampleCount];
-    float left[kDOUAudioAnalyzerCount];
-    float right[kDOUAudioAnalyzerCount];
-  } _vectors;
+    int16_t _sampleBuffer[kDOUAudioAnalyzerSampleCount];
+    struct {
+      float sample[kDOUAudioAnalyzerSampleCount];
+      float left[kDOUAudioAnalyzerCount];
+      float right[kDOUAudioAnalyzerCount];
+    } _vectors;
 
-  struct {
-    float left[kDOUAudioAnalyzerLevelCount];
-    float right[kDOUAudioAnalyzerLevelCount];
-    float overall[kDOUAudioAnalyzerLevelCount];
-  } _levels;
+    struct {
+      float left[kDOUAudioAnalyzerLevelCount];
+      float right[kDOUAudioAnalyzerLevelCount];
+      float overall[kDOUAudioAnalyzerLevelCount];
+    } _levels;
 
-  uint64_t _interval;
-  uint64_t _lastTime;
+    struct {
+        float left[kDOUAudioAnalyzerLevelCount];
+        float right[kDOUAudioAnalyzerLevelCount];
+    } _realtimeLevel;
 
-  BOOL _enabled;
-  pthread_mutex_t _mutex;
+    uint64_t _interval;
+    uint64_t _lastTime;
+
+    BOOL _enabled;
+    pthread_mutex_t _mutex;
+
+    RealtimeAnalyzer *_realtimeAnalyzer;
 }
 @end
 
@@ -56,13 +65,14 @@
 {
   self = [super init];
   if (self) {
-    _enabled = NO;
-    pthread_mutex_init(&_mutex, NULL);
+      _enabled = NO;
+      pthread_mutex_init(&_mutex, NULL);
 
-    _lastTime = 0;
-    [self setInterval:0.1];
+      _lastTime = 0;
+      [self setInterval:0.1];
 
-    [self flush];
+      [self flush];
+      _realtimeAnalyzer = [[RealtimeAnalyzer alloc] initWithFFTSize:kDOUAudioAnalyzerCount];
   }
 
   return self;
@@ -111,9 +121,11 @@
 
 - (void)flush
 {
-  pthread_mutex_lock(&_mutex);
-  vDSP_vclr(_levels.overall, 1, kDOUAudioAnalyzerLevelCount);
-  pthread_mutex_unlock(&_mutex);
+    pthread_mutex_lock(&_mutex);
+    vDSP_vclr(_levels.overall, 1, kDOUAudioAnalyzerLevelCount);
+    vDSP_vclr(_realtimeLevel.left, 1, kDOUAudioAnalyzerLevelCount);
+    vDSP_vclr(_realtimeLevel.right, 1, kDOUAudioAnalyzerLevelCount);
+    pthread_mutex_unlock(&_mutex);
 }
 
 + (double)_absoluteTimeConversion
@@ -159,15 +171,27 @@
   }
   pthread_mutex_unlock(&_mutex);
 }
-
+- (void)copyLeftLevels:(float *)leftlevels rightLevels:(float *)rightLevels {
+    pthread_mutex_lock(&_mutex);
+    if (leftlevels != NULL) {
+        memcpy(leftlevels, _realtimeLevel.left, sizeof(float) * kDOUAudioAnalyzerLevelCount);
+    }
+    if (rightLevels != NULL) {
+        memcpy(rightLevels, _realtimeLevel.right, sizeof(float) * kDOUAudioAnalyzerLevelCount);
+    }
+    pthread_mutex_unlock(&_mutex);
+}
 - (void)_analyzeLinearPCMSamples:(const int16_t *)samples
 {
-  [self _splitStereoSamples:samples];
+    [self _splitStereoSamples:samples];
 
-  [self processChannelVectors:_vectors.left toLevels:_levels.left];
-  [self processChannelVectors:_vectors.right toLevels:_levels.right];
+    [self processChannelVectors:_vectors.left toLevels:_levels.left];
+    [self processChannelVectors:_vectors.right toLevels:_levels.right];
 
-  [self _updateLevels];
+    [_realtimeAnalyzer analyseLevel:_vectors.left result:_realtimeLevel.left left:YES];
+    [_realtimeAnalyzer analyseLevel:_vectors.right result:_realtimeLevel.right left:NO];
+
+    [self _updateLevels];
 }
 
 - (void)_splitStereoSamples:(const int16_t *)samples
@@ -192,6 +216,7 @@
   static const float min = 0.0f;
   static const float max = 1.0f;
   vDSP_vclip(_levels.overall, 1, (float *)&min, (float *)&max, _levels.overall, 1, kDOUAudioAnalyzerLevelCount);
+
 }
 
 - (void)processChannelVectors:(const float *)vectors toLevels:(float *)levels
