@@ -10,9 +10,9 @@
 		A465F2082252F3B000799113 /* 01.Halcyon - Runaway (Feat. Valentina Franco) (Heuse Remix).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A465F2052252F3B000799113 /* 01.Halcyon - Runaway (Feat. Valentina Franco) (Heuse Remix).mp3 */; };
 		A465F2092252F3B000799113 /* 02.Ellis - Clear My Head (Radio Edit) [NCS].mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A465F2062252F3B000799113 /* 02.Ellis - Clear My Head (Radio Edit) [NCS].mp3 */; };
 		A465F20A2252F3B000799113 /* 03.Spektrum & Sara Skinner - Keep You.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A465F2072252F3B000799113 /* 03.Spektrum & Sara Skinner - Keep You.mp3 */; };
-		A465F2A62255EB1400799113 /* SpectrumView.m in Sources */ = {isa = PBXBuildFile; fileRef = A465F2A52255EB1200799113 /* SpectrumView.m */; };
 		A465F2A82255EB4E00799113 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A465F2A72255EB4E00799113 /* Launch Screen.storyboard */; };
-		A465F2AB2255F10600799113 /* RealtimeAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = A465F2A92255F10600799113 /* RealtimeAnalyzer.m */; };
+		A465F2B0225607EB00799113 /* SpectrumView.m in Sources */ = {isa = PBXBuildFile; fileRef = A465F2AC225607EB00799113 /* SpectrumView.m */; };
+		A465F2B1225607EB00799113 /* RealtimeAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = A465F2AF225607EB00799113 /* RealtimeAnalyzer.m */; };
 		D400E947171BF13F00BE7F37 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D400E946171BF13F00BE7F37 /* Accelerate.framework */; };
 		D40A255D17694680000B98AA /* DOUAudioAnalyzer+Default.m in Sources */ = {isa = PBXBuildFile; fileRef = D40A255C17694680000B98AA /* DOUAudioAnalyzer+Default.m */; };
 		D40A4D1717AB83C400D0305F /* DOUAudioStreamer+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = D40A4D1617AB83C400D0305F /* DOUAudioStreamer+Options.m */; };
@@ -59,11 +59,11 @@
 		A465F2052252F3B000799113 /* 01.Halcyon - Runaway (Feat. Valentina Franco) (Heuse Remix).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "01.Halcyon - Runaway (Feat. Valentina Franco) (Heuse Remix).mp3"; sourceTree = "<group>"; };
 		A465F2062252F3B000799113 /* 02.Ellis - Clear My Head (Radio Edit) [NCS].mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "02.Ellis - Clear My Head (Radio Edit) [NCS].mp3"; sourceTree = "<group>"; };
 		A465F2072252F3B000799113 /* 03.Spektrum & Sara Skinner - Keep You.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "03.Spektrum & Sara Skinner - Keep You.mp3"; sourceTree = "<group>"; };
-		A465F2A42255EB1200799113 /* SpectrumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpectrumView.h; path = ../example/DOUASDemo/DOUASDemo/SpectrumView.h; sourceTree = "<group>"; };
-		A465F2A52255EB1200799113 /* SpectrumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpectrumView.m; path = ../example/DOUASDemo/DOUASDemo/SpectrumView.m; sourceTree = "<group>"; };
 		A465F2A72255EB4E00799113 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		A465F2A92255F10600799113 /* RealtimeAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RealtimeAnalyzer.m; path = ../example/DOUASDemo/DOUASDemo/RealtimeAnalyzer.m; sourceTree = "<group>"; };
-		A465F2AA2255F10600799113 /* RealtimeAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RealtimeAnalyzer.h; path = ../example/DOUASDemo/DOUASDemo/RealtimeAnalyzer.h; sourceTree = "<group>"; };
+		A465F2AC225607EB00799113 /* SpectrumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpectrumView.m; sourceTree = "<group>"; };
+		A465F2AD225607EB00799113 /* RealtimeAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealtimeAnalyzer.h; sourceTree = "<group>"; };
+		A465F2AE225607EB00799113 /* SpectrumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpectrumView.h; sourceTree = "<group>"; };
+		A465F2AF225607EB00799113 /* RealtimeAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealtimeAnalyzer.m; sourceTree = "<group>"; };
 		D400E946171BF13F00BE7F37 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		D40A255B17694680000B98AA /* DOUAudioAnalyzer+Default.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DOUAudioAnalyzer+Default.h"; sourceTree = "<group>"; };
 		D40A255C17694680000B98AA /* DOUAudioAnalyzer+Default.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DOUAudioAnalyzer+Default.m"; sourceTree = "<group>"; };
@@ -212,10 +212,10 @@
 				D43AFF96176A938100D1FECF /* DOUEAGLView.m */,
 				D43AFF91176A938100D1FECF /* DOUAudioVisualizer.h */,
 				D43AFF92176A938100D1FECF /* DOUAudioVisualizer.m */,
-				A465F2AA2255F10600799113 /* RealtimeAnalyzer.h */,
-				A465F2A92255F10600799113 /* RealtimeAnalyzer.m */,
-				A465F2A42255EB1200799113 /* SpectrumView.h */,
-				A465F2A52255EB1200799113 /* SpectrumView.m */,
+				A465F2AD225607EB00799113 /* RealtimeAnalyzer.h */,
+				A465F2AF225607EB00799113 /* RealtimeAnalyzer.m */,
+				A465F2AE225607EB00799113 /* SpectrumView.h */,
+				A465F2AC225607EB00799113 /* SpectrumView.m */,
 			);
 			name = DOUAudioStreamer;
 			path = ../../../src;
@@ -376,7 +376,7 @@
 				D4C38933171B9D87009D6124 /* AppDelegate.m in Sources */,
 				D43ACD8A1738B47B00E6A571 /* DOUAudioDecoder.m in Sources */,
 				D43AFF97176A938100D1FECF /* DOUAudioVisualizer.m in Sources */,
-				A465F2AB2255F10600799113 /* RealtimeAnalyzer.m in Sources */,
+				A465F2B1225607EB00799113 /* RealtimeAnalyzer.m in Sources */,
 				D43AFF99176A938100D1FECF /* DOUEAGLView.m in Sources */,
 				D44920A018A5D12000651CD2 /* DOUMPMediaLibraryAssetLoader.m in Sources */,
 				D43ACD8B1738B47B00E6A571 /* DOUAudioEventLoop.m in Sources */,
@@ -384,7 +384,7 @@
 				D40A255D17694680000B98AA /* DOUAudioAnalyzer+Default.m in Sources */,
 				D43ACD8D1738B47B00E6A571 /* DOUAudioFileProvider.m in Sources */,
 				D4F5B29618A5F6B90063865C /* PlayerViewController.m in Sources */,
-				A465F2A62255EB1400799113 /* SpectrumView.m in Sources */,
+				A465F2B0225607EB00799113 /* SpectrumView.m in Sources */,
 				D43ACD8E1738B47B00E6A571 /* DOUAudioLPCM.m in Sources */,
 				D43ACD8F1738B47B00E6A571 /* DOUAudioPlaybackItem.m in Sources */,
 				D43ACD901738B47B00E6A571 /* DOUAudioRenderer.m in Sources */,
