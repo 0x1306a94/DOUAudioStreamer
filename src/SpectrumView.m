@@ -115,7 +115,8 @@
 
 #pragma mark - private method
 - (CGFloat)translateAmplitudeToYPosition:(float)amplitude {
-    CGFloat barHeight = (CGFloat)(amplitude * 5) * (CGRectGetHeight(self.bounds) - self.bottomSpace - self.topSpace);
+    CGFloat barHeight = (CGFloat)((amplitude > 0 ? (amplitude * 5.0) : amplitude)) * (CGRectGetHeight(self.bounds) - self.bottomSpace - self.topSpace);
+//    CGFloat barHeight = (CGFloat)(amplitude) * (CGRectGetHeight(self.bounds) - self.bottomSpace - self.topSpace);
     return CGRectGetHeight(self.bounds) - self.bottomSpace - barHeight;
 }
 #pragma mark - public method
